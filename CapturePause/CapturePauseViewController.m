@@ -399,14 +399,14 @@
     // Allows the cameraView to rezie accordingly to the full width and height of the current orientation
     self.cameraView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.cameraView.layer addSublayer:self.preview];
-    [self cameraControlsInit:self.duration decrement:YES];
+    [self cameraControlsInit:self.duration decrement:NO];
 }
 
 - (void) pauseVideoCapture
 {
     
     // options could contain duration in seconds, whether time is decrementing
-    self.duration = [NSNumber numberWithInt:180];
+    self.duration = [NSNumber numberWithInt:0];
     self.decrementTime = YES;
     if (self.duration == nil)
         self.duration = 0;
@@ -561,6 +561,12 @@
 {
     [[CameraEngine engine] saveCapture];
     [self nillify];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Saved"
+                                                    message:@"Video successfully saved."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Ok"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 @end
